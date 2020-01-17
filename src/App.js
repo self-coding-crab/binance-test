@@ -4,6 +4,19 @@ import Container from '@material-ui/core/Container';
 import {OrderBook} from "./modules/OrderBook/OrderBook";
 import {makeStyles, createMuiTheme} from "@material-ui/core";
 import { ThemeProvider } from '@material-ui/core/styles';
+import {IntlProvider} from 'react-intl';
+
+import messages_th from "./translations/th.json";
+import messages_en from "./translations/en.json";
+
+const messages = {
+    th: messages_th,
+    en: {
+        price: "Price",
+        amount: "Amount",
+        total: "Total"
+    }
+};
 
 const useStyles = makeStyles({
     container: {
@@ -19,12 +32,15 @@ const theme = ( mode ) => createMuiTheme({
 export default function App() {
     const classes = useStyles();
     const [mode, setMode] = useState('dark');
+    const [languageMode, setLanguageMode] = useState('en')
     return (
-        <ThemeProvider theme={theme(mode)}>
-            <CssBaseline/>
-            <Container className={classes.container}>
-                <OrderBook setMode={setMode} mode={mode}/>
-            </Container>
-        </ThemeProvider>
+        <IntlProvider locale={languageMode} messages={messages[languageMode]}>
+            <ThemeProvider theme={theme(mode)}>
+                <CssBaseline/>
+                <Container className={classes.container}>
+                    <OrderBook setMode={setMode} mode={mode} setLanguageMode={setLanguageMode} languageMode={languageMode} />
+                </Container>
+            </ThemeProvider>
+        </IntlProvider>
     );
 }

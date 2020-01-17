@@ -8,6 +8,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 import { Tooltip } from '@material-ui/core';
+import {FormattedMessage} from 'react-intl';
+
 import { ToolTipWrapper } from '../../components/ToolTip'
 const useStyles = makeStyles({
     root: {
@@ -37,9 +39,15 @@ export default function OrdersList({title, items}) {
             <Table aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.cellPrice}>Price</TableCell>
-                        <TableCell  className={classes.cellAmount}>Amount</TableCell>
-                        <TableCell>Total</TableCell>
+                        <TableCell className={classes.cellPrice}>
+                            <FormattedMessage id="price" />
+                        </TableCell>
+                        <TableCell  className={classes.cellAmount}>
+                            <FormattedMessage id="amount" />
+                        </TableCell>
+                        <TableCell>
+                            <FormattedMessage id="total" />
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

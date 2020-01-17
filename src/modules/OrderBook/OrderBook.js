@@ -5,10 +5,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 import OrdersList from "./OrdersList";
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {PAIRS_LIST} from '../../shared/constants/binance';
 
 const useStyles = makeStyles({
@@ -22,7 +20,7 @@ export function OrderBook(props) {
     const classes = useStyles();
     const [pair, setPair] = useState('btcusdt');
     const {isLoading, message} = useBinanceOrderBook(pair);
-    const { mode, setMode } = props;
+    const { mode, setMode, languageMode, setLanguageMode } = props;
     const handleChangePair = (event, mode) => {
         if (mode)
             setPair(mode);
@@ -30,6 +28,10 @@ export function OrderBook(props) {
     const handleModeChange = (event, mode) => {
         if (mode)
             setMode(mode)
+    }
+    const handleLanguageChange = (event, mode) => {
+        if (mode)
+            setLanguageMode(mode)
     }
     return (
         <>
@@ -59,6 +61,16 @@ export function OrderBook(props) {
                         </ToggleButton>
                         <ToggleButton key={2} value="light">
                             light
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </Grid>
+                <Grid item>
+                    <ToggleButtonGroup exclusive size="small" onChange={handleLanguageChange} value={languageMode}>
+                        <ToggleButton key={1} value="en">
+                            English
+                        </ToggleButton>
+                        <ToggleButton key={2} value="th">
+                            Thailand
                         </ToggleButton>
                     </ToggleButtonGroup>
                 </Grid>
