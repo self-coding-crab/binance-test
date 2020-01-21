@@ -33,6 +33,8 @@ export function OrderBook(props) {
         if (mode)
             setLanguageMode(mode)
     }
+
+    console.log('bid', message)
     return (
         <>
             <Grid container spacing={3}>
